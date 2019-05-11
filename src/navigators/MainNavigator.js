@@ -5,7 +5,7 @@ import Home from '../views/Home'
 import Colors from '../constants/Colors'
 
 const mainNavigator = createStackNavigator({
-  Home: { screen: Home, navigationOptions: { title: 'Home' } }
+  Home: { screen: Home, navigationOptions: { title: 'Fazenda Montrevidel' } }
 }, {
   headerMode: 'float',
   mode: 'card',
