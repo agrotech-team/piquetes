@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Dimensions, Image } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-native'
 import Info from './Info'
 import * as PropTypes from 'prop-types'
 import Colors from '../constants/Colors'
@@ -7,7 +7,7 @@ import Colors from '../constants/Colors'
 export default class Piquete extends Component {
 
   static get propTypes() {
-    return { piquete: PropTypes.object.isRequired }
+    return { piquete: PropTypes.object.isRequired, onPress: PropTypes.func.isRequired }
   }
 
   _renderBull = () => {
@@ -19,18 +19,22 @@ export default class Piquete extends Component {
     return null
   }
 
+  _onPress = () => this.props.onPress(this.props.piquete.id)
+
   render = () => {
     const { piquete } = this.props
     return (
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{piquete.nome}</Text>
-        {this._renderBull()}
-        <View style={styles.body}>
-          <Info title='Capacidade' text={`${piquete.capacidade}%`}/>
-          <Info title='Área' text={`${piquete.area} ha`}/>
-          <Text style={[styles.descricao, styles[piquete.status.label]]}>{piquete.status.descricao}</Text>
+      <TouchableOpacity onPress={this._onPress} style={styles.card}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.cardTitle}>{piquete.nome}</Text>
+          {this._renderBull()}
+          <View style={styles.body}>
+            <Info title='Capacidade' text={`${piquete.capacidade}%`}/>
+            <Info title='Área' text={`${piquete.area} ha`}/>
+            <Text style={[styles.descricao, styles[piquete.status.label]]}>{piquete.status.descricao}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 }

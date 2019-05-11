@@ -9,7 +9,7 @@ const list = [
     status: { label: 'ok', descricao: 'Vago' },
     area: 10,
     boiada: false,
-    capacidade: 95
+    capacidade: 0
   },
   {
     id: 2,
@@ -26,12 +26,23 @@ const list = [
     boiada: true,
     area: 15,
     capacidade: 95
+  },
+  {
+    id: 4,
+    nome: 'Piquete 04',
+    status: { label: 'inativo', descricao: 'Faltam 3 dias para reutilizar' },
+    boiada: true,
+    area: 15,
+    capacidade: 0
   }
 ]
 
 export default class Home extends Component {
 
-  _renderItem = ({ item }) => <Piquete piquete={item}/>
+  _renderItem = ({ item }) => {
+    const { navigate } = this.props.navigation
+    return <Piquete onPress={id => navigate('Piquete', { id })} piquete={item}/>
+  }
 
   render = () => {
     return (
